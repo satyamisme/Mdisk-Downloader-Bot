@@ -134,6 +134,12 @@ def down(message,link):
         app.edit_message_text(message.chat.id, msg.id,"__**Invalid Link**__")
         return
 
+    # checking if its a link returned
+    if check == -1:
+        app.edit_message_text(message.chat.id, msg.id,f"__**Can't Download File but here is the Download Link : {file}**__")
+        os.rmdir(str(message.id))
+        return
+
     # checking size
     size = split.get_path_size(file)
     if(size > TG_SPLIT_SIZE):
